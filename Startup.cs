@@ -28,7 +28,9 @@ namespace PlatformService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("Platforms"));
+            // Register in-memory database
+            services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("PlatformsDB"));
+            services.AddScoped<IPlatformRepo, PlatformRepo>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -57,6 +59,8 @@ namespace PlatformService
             {
                 endpoints.MapControllers();
             });
+
+            PrepDb.PrepPopulation(app);
         }
     }
 }
