@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +20,8 @@ namespace PlatformService.Data
         {
             if(!context.Platforms.Any())
             {
+                Console.WriteLine("======> Adding test data");
+
                 context.Platforms.AddRange(
                     new Platform { Name = "PlayStation 4", Publisher = "Sony", Cost = "100" },
                     new Platform { Name = "Xbox One", Publisher = "Microsoft", Cost = "100" },
@@ -26,6 +29,10 @@ namespace PlatformService.Data
                 );
 
                 context.SaveChanges();
+            }
+            else
+            {
+                Console.WriteLine("======> Platforms already exist");
             }
         }
     }
