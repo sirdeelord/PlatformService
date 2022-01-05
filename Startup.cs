@@ -31,6 +31,7 @@ namespace PlatformService
             // Register in-memory database
             services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("PlatformsDB"));
             services.AddScoped<IPlatformRepo, PlatformRepo>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
